@@ -9,6 +9,14 @@ const C = {
 const grad = "linear-gradient(135deg,#2c3e50 0%,#3498db 100%)";
 const grad2 = "linear-gradient(135deg,#667eea 0%,#764ba2 100%)";
 
+/* ── CONTACT ──
+   Le formulaire envoie les messages via Formspree (gratuit, sans serveur).
+   1) Créer un compte sur https://formspree.io  2) "New form"  3) copier l'identifiant
+   du formulaire (la fin de l'URL https://formspree.io/f/XXXXXXXX) et le coller ci-dessous.
+   Tant que FORMSPREE_ID est vide, le bouton ouvre le client mail du visiteur (mailto). */
+const FORMSPREE_ID = "xkjgrrvw";
+const CONTACT_EMAIL = "jawher.sbabti@gmail.com";
+
 function useVisible(t = 0.1) {
   const ref = useRef(null);
   const [vis, setVis] = useState(false);
@@ -40,40 +48,46 @@ const skills = [
 
 const projects = [
   {
-    icon:"📊", title:"Prédiction Ventes & Stocks", g:grad,
-    desc:"Pipeline ETL Talend, modèles ML (Random Forest & Prophet), dashboard Power BI avec KPIs (SS, PC, EOQ). — Bee Coders",
-    tech:["Talend","Power BI","Python","ML","MySQL","ETL"],
-    video:"demo_bee_coders.mp4"
+    icon:"🏦", title:"Gestion Crédit Bancaire (PFE)", g:grad,
+    desc:"Plateforme bancaire complète de gestion des demandes de crédit avec workflow de validation à 2 niveaux, simulation en temps réel, calcul d'endettement et génération automatique d'échéancier. Inspiré de la Banque Zitouna.",
+    tech:["PHP","MySQL","HTML5","CSS3","JavaScript","Chart.js"],
+    video:"demo_credit_bancaire.mp4",
+    github:"https://github.com/jawher71998/gestion-credit-bancaire"
   },
   {
-    icon:"💰", title:"Gestion Avances en Devises", g:grad2,
-    desc:"Application complète pour Tunisair. Modélisation BDD, interfaces utilisateur, support 50+ utilisateurs.",
-    tech:["Java","MySQL","UML","Merise"],
-    video:"demo_tunisair.mp4"
+    icon:"✈️", title:"Jawher Travel Agency", g:grad2,
+    desc:"Plateforme complète d'agence de voyage avec réservation en ligne, paiement Konnect, chat temps réel, tableau de bord analytics, 5 langues (FR/EN/AR/IT/DE) et système d'emails automatiques.",
+    tech:["React.js","Node.js","Express.js","MongoDB","Socket.io","JWT","Cloudinary"],
+    video:"demo_jawher_travel.mp4",
+    github:"https://github.com/jawher71998/jawher-travel"
   },
   {
-    icon:"📋", title:"Gestion des Réclamations", g:grad,
-    desc:"Application desktop réduisant le traitement des demandes de 40%. — Ola Energy",
-    tech:["C#",".NET","SQL Server"],
-    video:"demo_ola_energy.mp4"
+    icon:"🍝", title:"La Tavola di Roma", g:grad,
+    desc:"Application web Full-Stack pour un restaurant italien. Réservation en 3 étapes, panel admin avec dashboard temps réel, gestion du menu, calendrier visuel et notifications instantanées.",
+    tech:["HTML5","CSS3","JavaScript","Supabase","PostgreSQL","Netlify"],
+    video:"demo_latavola.mp4",
+    github:"https://github.com/jawher71998/latavola-di-roma"
   },
   {
-    icon:"✈️", title:"Site Agence de Voyage", g:grad2,
-    desc:"Site responsive avec réservation en ligne et interface d'administration.",
-    tech:["HTML5","CSS3","JavaScript","MySQL"],
-    video:"demo_agence_voyage.mp4"
+    icon:"🏫", title:"EduManager — Gestion Scolaire", g:grad2,
+    desc:"Application desktop multi-école de gestion scolaire (Spring Boot + React + Electron). Couvre tous les besoins administratifs et pédagogiques. Architecture multi-tenant, prête à commercialiser.",
+    tech:["Spring Boot","React.js","Electron","PostgreSQL","Java"],
+    video:"demo_edumanager.mp4",
+    github:"https://github.com/jawher71998/edumanager"
   },
   {
-    icon:"📱", title:"ProManage", g:grad,
-    desc:"Application de gestion de projets avec suivi des tâches et dashboards personnalisés.",
-    tech:["React.js","Node.js","Express.js","MongoDB"],
-    video:"demo_promanage.mp4"
+    icon:"📦", title:"Poste Tunisienne — Suivi Colis", g:grad,
+    desc:"Application web de gestion et suivi de colis avec code unique, statuts en temps réel (Reçu → Livré), tableau de bord statistique, authentification et gestion des utilisateurs.",
+    tech:["HTML5","CSS3","JavaScript","PHP","MySQL","Chart.js"],
+    video:"demo_poste_tunisienne.mp4",
+    github:"https://github.com/jawher71998/poste-suivi"
   },
   {
-    icon:"🌐", title:"Portfolio Personnel", g:grad2,
-    desc:"Portfolio React.js moderne présentant mon parcours, certifications et projets.",
-    tech:["React.js","HTML5","CSS3","JavaScript"],
-    video:"demo_portfolio.mp4"
+    icon:"🏨", title:"Grand Hôtel Paradise — Réservation", g:grad2,
+    desc:"Système de réservation hôtelière en ligne avec 3 rôles (Admin, Client, Visiteur). Gestion des chambres, réservations avec code promo, avis clients, galerie photos et dashboard admin.",
+    tech:["PHP","MySQL","HTML5","CSS3","JavaScript"],
+    video:"demo_hotel.mp4",
+    github:"https://github.com/jawher71998/hotel-reservation"
   },
 ];
 
@@ -93,18 +107,15 @@ function CertifModal({ c, onClose }) {
         <p style={{ color:"#666", marginBottom:16, fontSize:14 }}>{c.org} — {c.date}</p>
         <div style={{ background:C.light, borderRadius:12, overflow:"hidden" }}>
           <img 
-            src={`/${c.img}`} 
+            src={`${process.env.PUBLIC_URL}/${c.img}`} 
             alt={c.title} 
             style={{ width:"100%", display:"block", borderRadius:12 }}
-            onError={e=>{ 
-              e.target.style.display="none"; 
-              e.target.nextSibling.style.display="block"; 
-            }} 
+            onError={e=>{ e.target.style.display="none"; e.target.nextSibling.style.display="block"; }} 
           />
-        <div style={{ display:"none", padding:"40px 20px", textAlign:"center", color:"#999", fontSize:14 }}>
-          📄 Image <strong>{c.img}</strong> introuvable
+          <div style={{ display:"none", padding:"40px 20px", textAlign:"center", color:"#999", fontSize:14 }}>
+            📄 Image <strong style={{ color:C.secondary }}>{c.img}</strong> introuvable dans public/
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
@@ -112,6 +123,7 @@ function CertifModal({ c, onClose }) {
 
 /* ── MODAL VIDEO ── */
 function VideoModal({ project, onClose }) {
+  const [failed, setFailed] = useState(false);
   useEffect(() => {
     const fn = e => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", fn);
@@ -121,18 +133,21 @@ function VideoModal({ project, onClose }) {
   return (
     <div onClick={onClose} style={{ position:"fixed", inset:0, background:"rgba(0,0,0,0.92)", zIndex:9999, display:"flex", alignItems:"center", justifyContent:"center", padding:16 }}>
       <div onClick={e=>e.stopPropagation()} style={{ background:"#111", borderRadius:18, padding:20, maxWidth:780, width:"100%", position:"relative" }}>
-        <button onClick={onClose} style={{ position:"absolute", top:12, right:12, background:C.accent, color:"#fff", border:"none", borderRadius:"50%", width:34, height:34, fontSize:16, cursor:"pointer", fontWeight:700, zIndex:1 }}>✕</button>
+        <button onClick={onClose} aria-label="Fermer" style={{ position:"absolute", top:12, right:12, background:C.accent, color:"#fff", border:"none", borderRadius:"50%", width:34, height:34, fontSize:16, cursor:"pointer", fontWeight:700, zIndex:1 }}>✕</button>
         <h3 style={{ color:"#fff", marginBottom:12, paddingRight:44 }}>{project.title} — Démo</h3>
         <div style={{ background:"#222", borderRadius:12, overflow:"hidden", aspectRatio:"16/9", display:"flex", alignItems:"center", justifyContent:"center" }}>
-          <video controls width="100%" style={{ display:"block", borderRadius:12 }}>
-            <source src={project.video} type="video/mp4" />
-            <div style={{ color:"#aaa", padding:40, textAlign:"center" }}>
-              🎬 Placez <strong style={{ color:"#fff" }}>{project.video}</strong> dans le dossier du projet pour afficher la vidéo de démo.
+          {failed ? (
+            <div style={{ color:"#aaa", padding:40, textAlign:"center", fontSize:14 }}>
+              🎬 La démo vidéo de ce projet sera bientôt disponible.
             </div>
-          </video>
+          ) : (
+            <video controls playsInline preload="metadata" style={{ display:"block", width:"100%", height:"100%", borderRadius:12 }}>
+              <source src={`${process.env.PUBLIC_URL}/${project.video}`} type="video/mp4" onError={() => setFailed(true)} />
+            </video>
+          )}
         </div>
         <p style={{ color:"rgba(255,255,255,0.5)", fontSize:12, marginTop:10, textAlign:"center" }}>
-          Fichier vidéo : {project.video} • Appuyez sur Échap pour fermer
+          Appuyez sur Échap pour fermer
         </p>
       </div>
     </div>
@@ -203,7 +218,7 @@ function Hero() {
           Titulaire d'une <strong>Licence en Big Data & Analyse des Données</strong>, certifié <strong>TOSA Python Expert (950/1000)</strong> & <strong>ITS Databases (Certiport International)</strong>.
         </p>
         <div style={{ display:"flex", gap:10, justifyContent:"center", flexWrap:"wrap", marginBottom:40 }}>
-          {[["📂 Projets","#projects"],["✉️ Contact","#contact"],["💼 LinkedIn","https://linkedin.com/in/jawher-sbabti"],["🐙 GitHub","https://github.com/jawher71998"],["📄 Mon CV","CV_Jawher_Sbabti.pdf"]].map(([lbl,href])=>(
+          {[["📂 Projets","#projects"],["✉️ Contact","#contact"],["💼 LinkedIn","https://linkedin.com/in/jawher-sbabti"],["🐙 GitHub","https://github.com/jawher71998"],["📄 Mon CV",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`]].map(([lbl,href])=>(
             <a key={lbl} href={href} target={href.startsWith("http")||href.endsWith(".pdf")?"_blank":undefined} rel="noreferrer"
               onClick={e=>{ if(href.startsWith("#")){ e.preventDefault(); document.getElementById(href.slice(1))?.scrollIntoView({behavior:"smooth"}); }}}
               style={{ padding:"9px 18px", borderRadius:50, background:"rgba(255,255,255,0.15)", color:"#fff", border:"2px solid rgba(255,255,255,0.5)", fontWeight:700, fontSize:13, textDecoration:"none" }}>
@@ -246,7 +261,7 @@ function About() {
       <Header title="À propos de moi" sub="Mon parcours, mes valeurs et ma vision" />
       <div ref={ref} style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"2.5rem", alignItems:"center", opacity:vis?1:0, transform:vis?"none":"translateY(30px)", transition:"all .7s ease" }}>
         <div style={{ textAlign:"center", position:"relative" }}>
-          <img src="imagecvjawher.png" alt="Jawher" style={{ width:"min(220px,60vw)", height:"min(220px,60vw)", borderRadius:"50%", objectFit:"cover", border:"8px solid #fff", boxShadow:"0 20px 60px rgba(0,0,0,0.15)", display:"block", margin:"0 auto" }} />
+          <img src={process.env.PUBLIC_URL + "/imagecvjawher.png"} alt="Jawher" style={{ width:"min(220px,60vw)", height:"min(220px,60vw)", borderRadius:"50%", objectFit:"cover", border:"8px solid #fff", boxShadow:"0 20px 60px rgba(0,0,0,0.15)", display:"block", margin:"0 auto" }} />
           <span style={{ display:"inline-block", marginTop:12, background:grad, color:"#fff", padding:"5px 14px", borderRadius:50, fontSize:12, fontWeight:700 }}>✅ Open to Work</span>
         </div>
         <div>
@@ -260,7 +275,7 @@ function About() {
             ))}
           </div>
           <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
-            <a href="CV_Jawher_Sbabti.pdf" target="_blank" rel="noreferrer" style={{ background:grad, color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>📄 Télécharger CV</a>
+            <a href={`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`} target="_blank" rel="noreferrer" style={{ background:grad, color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>📄 Télécharger CV</a>
             <a href="https://linkedin.com/in/jawher-sbabti" target="_blank" rel="noreferrer" style={{ background:"#0077b5", color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>💼 LinkedIn</a>
             <a href="https://github.com/jawher71998" target="_blank" rel="noreferrer" style={{ background:C.secondary, color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>🐙 GitHub</a>
           </div>
@@ -339,12 +354,16 @@ function Projects() {
                 ▶️ Voir la démo
               </button>
             </div>
-            <div style={{ padding:"1.5rem" }}>
+                          <div style={{ padding:"1.5rem" }}>
               <h3 style={{ color:C.secondary, marginBottom:8, fontSize:"1.05rem" }}>{p.title}</h3>
               <p style={{ color:"#666", marginBottom:12, fontSize:13, lineHeight:1.7 }}>{p.desc}</p>
-              <div style={{ display:"flex", flexWrap:"wrap", gap:6 }}>
+              <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:12 }}>
                 {p.tech.map(t=><span key={t} style={{ background:C.light, padding:"3px 9px", borderRadius:20, fontSize:11, color:C.primary, fontWeight:600 }}>{t}</span>)}
               </div>
+              <a href={p.github} target="_blank" rel="noreferrer"
+                style={{ display:"inline-flex", alignItems:"center", gap:6, background:C.secondary, color:"#fff", padding:"6px 14px", borderRadius:50, fontSize:12, fontWeight:700, textDecoration:"none" }}>
+                🐙 Voir sur GitHub
+              </a>
             </div>
           </div>
         ))}
@@ -355,16 +374,59 @@ function Projects() {
 }
 
 function Contact() {
-  const [form, setForm] = useState({ name:"", email:"", subject:"", msg:"" });
-  const [sent, setSent] = useState(false);
+  const empty = { name:"", email:"", subject:"", msg:"", website:"" };
+  const [form, setForm] = useState(empty);
+  const [status, setStatus] = useState("idle"); // idle | sending | sent | error
+  const [error, setError] = useState("");
   const [ref, vis] = useVisible();
-  const handleSubmit = () => {
-    if (!form.name || !form.email || !form.msg) return;
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
-    setForm({ name:"", email:"", subject:"", msg:"" });
+  const update = key => e => setForm(f => ({ ...f, [key]: e.target.value }));
+
+  const handleSubmit = async e => {
+    e.preventDefault();
+    if (status === "sending") return;
+    if (form.website) return; // champ piège anti-spam : un humain ne le remplit pas
+    if (!form.name.trim() || !form.email.trim() || !form.msg.trim()) {
+      setError("Remplissez le nom, l'email et le message pour envoyer.");
+      return;
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
+      setError("Cette adresse email n'est pas valide. Vérifiez-la et réessayez.");
+      return;
+    }
+    setError("");
+
+    // Sans identifiant Formspree : on ouvre le client mail du visiteur.
+    if (!FORMSPREE_ID) {
+      const subject = encodeURIComponent(form.subject.trim() || `Message de ${form.name.trim()} via le portfolio`);
+      const body = encodeURIComponent(`${form.msg.trim()}\n\n— ${form.name.trim()} (${form.email.trim()})`);
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+      return;
+    }
+
+    setStatus("sending");
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: form.name.trim(),
+          email: form.email.trim(),
+          _subject: form.subject.trim() || "Nouveau message depuis le portfolio",
+          message: form.msg.trim(),
+        }),
+      });
+      if (!res.ok) throw new Error("Envoi refusé");
+      setStatus("sent");
+      setForm(empty);
+      setTimeout(() => setStatus("idle"), 5000);
+    } catch {
+      setStatus("error");
+    }
   };
+
   const inp = { padding:"12px 16px", borderRadius:12, border:"1px solid rgba(255,255,255,0.15)", background:"rgba(255,255,255,0.08)", color:"#fff", fontSize:14, fontFamily:"inherit", width:"100%", outline:"none", boxSizing:"border-box" };
+  const label = { sending:"⏳ Envoi en cours…", sent:"✅ Message envoyé !", error:"🔁 Réessayer l'envoi", idle:"🚀 Envoyer le message" }[status];
+
   return (
     <Wrap id="contact" bg={C.secondary}>
       <Header title="Contactez-moi" sub="Je suis disponible pour toute opportunité professionnelle" />
@@ -383,15 +445,22 @@ function Contact() {
             <a href="https://github.com/jawher71998" target="_blank" rel="noreferrer" style={{ background:"#fff", color:C.secondary, padding:"10px 16px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>🐙 GitHub</a>
           </div>
         </div>
-        <div style={{ display:"flex", flexDirection:"column", gap:"1rem" }}>
-          <input placeholder="Votre nom" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} style={inp} />
-          <input type="email" placeholder="Votre email" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} style={inp} />
-          <input placeholder="Sujet" value={form.subject} onChange={e=>setForm({...form,subject:e.target.value})} style={inp} />
-          <textarea rows={5} placeholder="Votre message" value={form.msg} onChange={e=>setForm({...form,msg:e.target.value})} style={{ ...inp, resize:"vertical" }} />
-          <button onClick={handleSubmit} style={{ background:grad, color:"#fff", padding:"14px", borderRadius:12, border:"none", fontSize:15, fontWeight:700, cursor:"pointer", transition:"all .3s" }}>
-            {sent ? "✅ Message envoyé !" : "🚀 Envoyer le message"}
+        <form onSubmit={handleSubmit} noValidate style={{ display:"flex", flexDirection:"column", gap:"1rem" }}>
+          <input aria-label="Votre nom" placeholder="Votre nom" autoComplete="name" value={form.name} onChange={update("name")} style={inp} />
+          <input aria-label="Votre email" type="email" placeholder="Votre email" autoComplete="email" value={form.email} onChange={update("email")} style={inp} />
+          <input aria-label="Sujet" placeholder="Sujet" value={form.subject} onChange={update("subject")} style={inp} />
+          <textarea aria-label="Votre message" rows={5} placeholder="Votre message" value={form.msg} onChange={update("msg")} style={{ ...inp, resize:"vertical" }} />
+          {/* Champ piège anti-spam, invisible pour les humains */}
+          <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={form.website} onChange={update("website")} style={{ position:"absolute", left:"-9999px", width:1, height:1, opacity:0 }} />
+          <button type="submit" disabled={status==="sending"} style={{ background:grad, color:"#fff", padding:"14px", borderRadius:12, border:"none", fontSize:15, fontWeight:700, cursor:status==="sending"?"wait":"pointer", opacity:status==="sending"?0.7:1, transition:"all .3s" }}>
+            {label}
           </button>
-        </div>
+          <div role="status" aria-live="polite" style={{ minHeight:20, fontSize:13, textAlign:"center" }}>
+            {error && <span style={{ color:"#ff8a80" }}>{error}</span>}
+            {status==="error" && !error && <span style={{ color:"#ff8a80" }}>L'envoi a échoué. Réessayez, ou écrivez-moi directement à {CONTACT_EMAIL}.</span>}
+            {status==="sent" && <span style={{ color:"#a5d6a7" }}>Merci ! Je vous réponds dès que possible.</span>}
+          </div>
+        </form>
       </div>
     </Wrap>
   );
