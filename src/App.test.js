@@ -9,7 +9,7 @@ describe('Portfolio de Jawher Sbabti', () => {
       screen.getByRole('heading', { level: 1, name: /jawher sbabti/i })
     ).toBeInTheDocument();
 
-    ['À propos de moi', 'Certifications', 'Mes Compétences', 'Mes Projets', 'Contactez-moi'].forEach(
+    ['À propos de moi', 'Mes Stages', 'Certifications', 'Mes Compétences', 'Mes Projets', 'Contactez-moi'].forEach(
       titre => {
         expect(screen.getByRole('heading', { level: 2, name: titre })).toBeInTheDocument();
       }
@@ -18,7 +18,7 @@ describe('Portfolio de Jawher Sbabti', () => {
 
   test('le menu permet de naviguer vers chaque section', () => {
     render(<App />);
-    ['Accueil', 'À propos', 'Compétences', 'Projets', 'Contact'].forEach(nom => {
+    ['Accueil', 'À propos', 'Stages', 'Compétences', 'Projets', 'Contact'].forEach(nom => {
       expect(screen.getAllByRole('button', { name: nom }).length).toBeGreaterThan(0);
     });
   });
@@ -55,6 +55,16 @@ describe('Portfolio de Jawher Sbabti', () => {
     expect(container.ownerDocument.querySelector('video source')).toHaveAttribute(
       'src',
       expect.stringContaining('demo_credit_bancaire.mp4')
+    );
+  });
+
+
+  test('un clic sur un stage ouvre son attestation', () => {
+    render(<App />);
+    fireEvent.click(screen.getByText('Bee Coders'));
+    expect(screen.getByAltText('Stage Data & BI')).toHaveAttribute(
+      'src',
+      expect.stringContaining('attestation_beecoders.jpg')
     );
   });
 

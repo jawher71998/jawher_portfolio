@@ -37,6 +37,21 @@ const certifs = [
   { badge:"🤝 Soft Skills", title:"Attestation Soft Skills", org:"ANETI / ACJEMP", date:"Décembre 2023", img:"certif_softskills.jpg" },
 ];
 
+const stages = [
+  { title:"Stage Data & BI", org:"Bee Coders", date:"01/06/2026 – 01/07/2026",
+    desc:"Pipeline ETL avec Talend Open Studio vers DataWarehouse MySQL (schéma en étoile). Modèles ML (Random Forest & Prophet) pour prédiction des ventes. Dashboard Power BI avec KPIs (SS, PC, EOQ) pour optimisation des stocks.",
+    img:"attestation_beecoders.jpg" },
+  { title:"Stage Technique", org:"Tunisair", date:"15/08/2025 – 22/09/2025",
+    desc:"Développement d'une application de gestion des avances en devises (Java, MySQL). Support technique et assistance aux utilisateurs du département IT.",
+    img:"attestation_tunisair.jpg" },
+  { title:"Stage Développement & Support IT", org:"Ola Energy", date:"21/08/2023 – 27/09/2023",
+    desc:"Application desktop de gestion des réclamations et nouvelles demandes (C#, .NET). Support IT : installation logiciels, maintenance matérielle, gestion parc informatique.",
+    img:"attestation_olaenergy.jpg" },
+  { title:"Stage Assistance Technique", org:"Tunisie Télécom", date:"19/09/2022 – 22/10/2022",
+    desc:"Assistance technique en environnement réseau et télécommunications. Gestion du système de ticketing et résolution d'incidents.",
+    img:"attestation_tunisietelecom.jpg" },
+];
+
 const skills = [
   { icon:"🌐", title:"Développement Web", tags:["HTML5","CSS3","JavaScript","React.js","Node.js","Express.js"] },
   { icon:"⚙️", title:"Langages", tags:["Python","Java","C#","Visual Basic","SQL"] },
@@ -157,7 +172,7 @@ function VideoModal({ project, onClose }) {
 /* ── NAV ── */
 function Nav({ active }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = [["Accueil","accueil"],["À propos","about"],["Certifications","certif"],["Compétences","skills"],["Projets","projects"],["Contact","contact"]];
+  const links = [["Accueil","accueil"],["À propos","about"],["Stages","stages"],["Certifications","certif"],["Compétences","skills"],["Projets","projects"],["Contact","contact"]];
   const go = id => { document.getElementById(id)?.scrollIntoView({ behavior:"smooth" }); setMenuOpen(false); };
   return (
     <nav style={{ position:"fixed", top:0, width:"100%", zIndex:1000, background:"rgba(255,255,255,0.97)", boxShadow:"0 2px 20px rgba(0,0,0,0.08)", padding:"0.75rem 1.5rem" }}>
@@ -281,6 +296,31 @@ function About() {
           </div>
         </div>
       </div>
+    </Wrap>
+  );
+}
+
+function Internships() {
+  const [modal, setModal] = useState(null);
+  const [ref, vis] = useVisible();
+  return (
+    <Wrap id="stages">
+      <Header title="Mes Stages" sub="Expériences en entreprise — cliquez pour voir l'attestation" />
+      <div ref={ref} style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:"1.4rem", opacity:vis?1:0, transform:vis?"none":"translateY(30px)", transition:"all .7s" }}>
+        {stages.map((s,i)=>(
+          <div key={i} onClick={()=>setModal(s)}
+            style={{ background:"#fff", padding:"1.5rem", borderRadius:16, boxShadow:"0 5px 20px rgba(0,0,0,0.06)", borderTop:`4px solid ${C.primary}`, cursor:"pointer", transition:"all .3s" }}
+            onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)"; e.currentTarget.style.boxShadow="0 15px 40px rgba(0,0,0,0.12)";}}
+            onMouseLeave={e=>{e.currentTarget.style.transform="none"; e.currentTarget.style.boxShadow="0 5px 20px rgba(0,0,0,0.06)";}}>
+            <h3 style={{ color:C.secondary, marginBottom:2, fontSize:"1.05rem" }}>{s.title}</h3>
+            <p style={{ color:C.primary, fontWeight:700, fontSize:13, marginBottom:2 }}>{s.org}</p>
+            <p style={{ color:"#aaa", fontSize:11, marginBottom:10 }}>{s.date}</p>
+            <p style={{ color:"#666", fontSize:13, lineHeight:1.7 }}>{s.desc}</p>
+            <p style={{ color:C.primary, fontSize:11, fontWeight:700, marginTop:10 }}>👁️ Cliquer pour voir l'attestation</p>
+          </div>
+        ))}
+      </div>
+      {modal && <CertifModal c={modal} onClose={()=>setModal(null)} />}
     </Wrap>
   );
 }
@@ -489,7 +529,7 @@ function Footer() {
 export default function App() {
   const [active, setActive] = useState("accueil");
   useEffect(() => {
-    const ids = ["accueil","about","certif","skills","projects","contact"];
+    const ids = ["accueil","about","stages","certif","skills","projects","contact"];
     const o = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
     }, { threshold:0.25 });
@@ -502,6 +542,7 @@ export default function App() {
       <div style={{ paddingTop:0 }}>
         <Hero />
         <About />
+        <Internships />
         <Certifications />
         <Skills />
         <Projects />
