@@ -14,7 +14,7 @@ const grad2 = "linear-gradient(135deg,#667eea 0%,#764ba2 100%)";
    1) Créer un compte sur https://formspree.io  2) "New form"  3) copier l'identifiant
    du formulaire (la fin de l'URL https://formspree.io/f/XXXXXXXX) et le coller ci-dessous.
    Tant que FORMSPREE_ID est vide, le bouton ouvre le client mail du visiteur (mailto). */
-const FORMSPREE_ID = "xkjgrrvw";
+const FORMSPREE_ID = "";
 const CONTACT_EMAIL = "jawher.sbabti@gmail.com";
 
 function useVisible(t = 0.1) {
@@ -59,7 +59,7 @@ const projects = [
     desc:"Plateforme complète d'agence de voyage avec réservation en ligne, paiement Konnect, chat temps réel, tableau de bord analytics, 5 langues (FR/EN/AR/IT/DE) et système d'emails automatiques.",
     tech:["React.js","Node.js","Express.js","MongoDB","Socket.io","JWT","Cloudinary"],
     video:"demo_jawher_travel.mp4",
-    github:"https://github.com/jawher71998/jawher-travel"
+    github:null
   },
   {
     icon:"🍝", title:"La Tavola di Roma", g:grad,
@@ -360,10 +360,16 @@ function Projects() {
               <div style={{ display:"flex", flexWrap:"wrap", gap:6, marginBottom:12 }}>
                 {p.tech.map(t=><span key={t} style={{ background:C.light, padding:"3px 9px", borderRadius:20, fontSize:11, color:C.primary, fontWeight:600 }}>{t}</span>)}
               </div>
-              <a href={p.github} target="_blank" rel="noreferrer"
-                style={{ display:"inline-flex", alignItems:"center", gap:6, background:C.secondary, color:"#fff", padding:"6px 14px", borderRadius:50, fontSize:12, fontWeight:700, textDecoration:"none" }}>
-                🐙 Voir sur GitHub
-              </a>
+              {p.github ? (
+                <a href={p.github} target="_blank" rel="noreferrer"
+                  style={{ display:"inline-flex", alignItems:"center", gap:6, background:C.secondary, color:"#fff", padding:"6px 14px", borderRadius:50, fontSize:12, fontWeight:700, textDecoration:"none" }}>
+                  🐙 Voir sur GitHub
+                </a>
+              ) : (
+                <span style={{ display:"inline-flex", alignItems:"center", gap:6, background:"#eee", color:"#888", padding:"6px 14px", borderRadius:50, fontSize:12, fontWeight:700 }}>
+                  🔒 Code privé
+                </span>
+              )}
             </div>
           </div>
         ))}
