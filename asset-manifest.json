@@ -1,10 +1,13 @@
 {
   "files": {
-    "main.js": "/jawher_portfolio/static/js/main.332a22b8.js",
+    "main.css": "/jawher_portfolio/static/css/main.e6c13ad2.css",
+    "main.js": "/jawher_portfolio/static/js/main.e2e1383a.js",
     "index.html": "/jawher_portfolio/index.html",
-    "main.332a22b8.js.map": "/jawher_portfolio/static/js/main.332a22b8.js.map"
+    "main.e6c13ad2.css.map": "/jawher_portfolio/static/css/main.e6c13ad2.css.map",
+    "main.e2e1383a.js.map": "/jawher_portfolio/static/js/main.e2e1383a.js.map"
   },
   "entrypoints": [
-    "static/js/main.332a22b8.js"
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.e2e1383a.js"
   ]
 }
