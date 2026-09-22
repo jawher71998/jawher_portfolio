@@ -233,7 +233,7 @@ function Hero() {
           Titulaire d'une <strong>Licence en Big Data & Analyse des Données</strong>, certifié <strong>TOSA Python Expert (950/1000)</strong> & <strong>ITS Databases (Certiport International)</strong>.
         </p>
         <div style={{ display:"flex", gap:10, justifyContent:"center", flexWrap:"wrap", marginBottom:40 }}>
-          {[["📂 Projets","#projects"],["✉️ Contact","#contact"],["💼 LinkedIn","https://linkedin.com/in/jawher-sbabti"],["🐙 GitHub","https://github.com/jawher71998"],["📄 Mon CV",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`]].map(([lbl,href])=>(
+          {[["📂 Projets","#projects"],["✉️ Contact","#contact"],["💼 LinkedIn","https://linkedin.com/in/jawher-sbabti"],["🐙 GitHub","https://github.com/jawher71998"],["📄 CV (FR)",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`],["📄 CV (EN)",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti_EN.pdf`]].map(([lbl,href])=>(
             <a key={lbl} href={href} target={href.startsWith("http")||href.endsWith(".pdf")?"_blank":undefined} rel="noreferrer"
               onClick={e=>{ if(href.startsWith("#")){ e.preventDefault(); document.getElementById(href.slice(1))?.scrollIntoView({behavior:"smooth"}); }}}
               style={{ padding:"9px 18px", borderRadius:50, background:"rgba(255,255,255,0.15)", color:"#fff", border:"2px solid rgba(255,255,255,0.5)", fontWeight:700, fontSize:13, textDecoration:"none" }}>
@@ -290,7 +290,8 @@ function About() {
             ))}
           </div>
           <div style={{ display:"flex", gap:10, flexWrap:"wrap" }}>
-            <a href={`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`} target="_blank" rel="noreferrer" style={{ background:grad, color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>📄 Télécharger CV</a>
+            <a href={`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`} target="_blank" rel="noreferrer" style={{ background:grad, color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>📄 CV (Français)</a>
+            <a href={`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti_EN.pdf`} target="_blank" rel="noreferrer" style={{ background:"#fff", color:C.primary, border:`2px solid ${C.primary}`, padding:"8px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>📄 CV (English)</a>
             <a href="https://linkedin.com/in/jawher-sbabti" target="_blank" rel="noreferrer" style={{ background:"#0077b5", color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>💼 LinkedIn</a>
             <a href="https://github.com/jawher71998" target="_blank" rel="noreferrer" style={{ background:C.secondary, color:"#fff", padding:"10px 18px", borderRadius:50, fontWeight:700, textDecoration:"none", fontSize:13 }}>🐙 GitHub</a>
           </div>
