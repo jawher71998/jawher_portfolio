@@ -14,7 +14,7 @@ const grad2 = "linear-gradient(135deg,#667eea 0%,#764ba2 100%)";
    1) Créer un compte sur https://formspree.io  2) "New form"  3) copier l'identifiant
    du formulaire (la fin de l'URL https://formspree.io/f/XXXXXXXX) et le coller ci-dessous.
    Tant que FORMSPREE_ID est vide, le bouton ouvre le client mail du visiteur (mailto). */
-const FORMSPREE_ID = "";
+const FORMSPREE_ID = "xkjgrrvw";
 const CONTACT_EMAIL = "jawher.sbabti@gmail.com";
 
 function useVisible(t = 0.1) {
