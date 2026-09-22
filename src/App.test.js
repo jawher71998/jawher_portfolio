@@ -68,6 +68,23 @@ describe('Portfolio de Jawher Sbabti', () => {
     );
   });
 
+
+  test('le bouton EN traduit le site en anglais', () => {
+    render(<App />);
+    expect(screen.getByRole('heading', { level: 2, name: 'À propos de moi' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'EN' }));
+
+    expect(screen.getByRole('heading', { level: 2, name: 'About Me' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Home' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 2, name: 'My Internships' })).toBeInTheDocument();
+  });
+
+  test('le bouton retour en haut est présent', () => {
+    render(<App />);
+    expect(screen.getByRole('button', { name: /retour en haut/i })).toBeInTheDocument();
+  });
+
   describe('formulaire de contact', () => {
     const envoyer = () =>
       fireEvent.click(screen.getByRole('button', { name: /envoyer le message/i }));
