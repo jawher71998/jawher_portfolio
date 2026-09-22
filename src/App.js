@@ -335,7 +335,7 @@ function Nav({ active, lang, setLang, tt }) {
   );
 
   return (
-    <nav style={{ position:"fixed", top:0, width:"100%", zIndex:1000, background:scrolled?"rgba(255,255,255,0.85)":"rgba(255,255,255,0.98)", backdropFilter:"blur(14px)", WebkitBackdropFilter:"blur(14px)", boxShadow:scrolled?"0 4px 24px rgba(0,0,0,0.08)":"0 1px 0 rgba(0,0,0,0.05)", padding:scrolled?"0.6rem 1.5rem":"0.9rem 1.5rem", transition:"all .25s ease" }}>
+    <nav style={{ position:"fixed", top:0, width:"100%", zIndex:1000, boxSizing:"border-box", background:scrolled?"rgba(255,255,255,0.85)":"rgba(255,255,255,0.98)", backdropFilter:"blur(14px)", WebkitBackdropFilter:"blur(14px)", boxShadow:scrolled?"0 4px 24px rgba(0,0,0,0.08)":"0 1px 0 rgba(0,0,0,0.05)", padding:scrolled?"0.6rem 1.5rem":"0.9rem 1.5rem", transition:"all .25s ease" }}>
       <div style={{ maxWidth:1200, margin:"0 auto", display:"flex", justifyContent:"space-between", alignItems:"center" }}>
         <button onClick={()=>go("accueil")} style={{ display:"flex", alignItems:"center", gap:8, background:"none", border:"none", cursor:"pointer", padding:0 }}>
           <span style={{ width:34, height:34, borderRadius:10, background:grad, color:"#fff", display:"flex", alignItems:"center", justifyContent:"center", fontWeight:800, fontSize:15, flexShrink:0 }}>JS</span>
