@@ -9,7 +9,7 @@ describe('Portfolio de Jawher Sbabti', () => {
       screen.getByRole('heading', { level: 1, name: /jawher sbabti/i })
     ).toBeInTheDocument();
 
-    ['À propos de moi', 'Mes Stages', 'Certifications', 'Mes Compétences', 'Mes Projets', 'Contactez-moi'].forEach(
+    ['À propos de moi', 'Mes Études', 'Mes Stages', 'Certifications', 'Mes Compétences', 'Mes Projets', 'Contactez-moi'].forEach(
       titre => {
         expect(screen.getByRole('heading', { level: 2, name: titre })).toBeInTheDocument();
       }
@@ -18,7 +18,7 @@ describe('Portfolio de Jawher Sbabti', () => {
 
   test('le menu permet de naviguer vers chaque section', () => {
     render(<App />);
-    ['Accueil', 'À propos', 'Stages', 'Compétences', 'Projets', 'Contact'].forEach(nom => {
+    ['Accueil', 'À propos', 'Mes Études', 'Stages', 'Compétences', 'Projets', 'Contact'].forEach(nom => {
       expect(screen.getAllByRole('button', { name: nom }).length).toBeGreaterThan(0);
     });
   });
@@ -68,6 +68,16 @@ describe('Portfolio de Jawher Sbabti', () => {
     );
   });
 
+
+
+  test('un clic sur un diplôme ouvre son image', () => {
+    render(<App />);
+    fireEvent.click(screen.getByText('BTS Informatique de Gestion'));
+    expect(screen.getByAltText('BTS Informatique de Gestion')).toHaveAttribute(
+      'src',
+      expect.stringContaining('diplome_bts_informatique.jpg')
+    );
+  });
 
   test('le bouton EN traduit le site en anglais', () => {
     render(<App />);

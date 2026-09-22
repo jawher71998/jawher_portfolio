@@ -153,10 +153,29 @@ const projectsByLang = {
   ],
 };
 
+const diplomasByLang = {
+  fr: [
+    { title:"Licence Big Data et Analyse de Données", org:"Keyce Informatique / Collège de Paris, Tunis", date:"2026",
+      desc:"Bachelor (Bac+3) spécialisé en Big Data, analyse de données et technologies décisionnelles.",
+      img:"diplome_licence_bigdata.jpg" },
+    { title:"BTS Informatique de Gestion", org:"IPSET, Tunis", date:"2025",
+      desc:"Brevet de Technicien Supérieur en développement et gestion de systèmes d'information.",
+      img:"diplome_bts_informatique.jpg" },
+  ],
+  en: [
+    { title:"Bachelor's Degree in Big Data & Data Analysis", org:"Keyce Informatique / Collège de Paris, Tunis", date:"2026",
+      desc:"Bachelor's degree focused on Big Data, data analysis and business intelligence technologies.",
+      img:"diplome_licence_bigdata.jpg" },
+    { title:"Advanced Technical Diploma (BTS) in IT Management", org:"IPSET, Tunis", date:"2025",
+      desc:"Advanced technical diploma in information systems development and management.",
+      img:"diplome_bts_informatique.jpg" },
+  ],
+};
+
 /* ── TEXTES D'INTERFACE (FR / EN) ── */
 const TXT = {
   fr: {
-    navLinks: ["Accueil","À propos","Stages","Certifications","Compétences","Projets","Contact"],
+    navLinks: ["Accueil","À propos","Mes Études","Stages","Certifications","Compétences","Projets","Contact"],
     heroBadge: "🚀 Disponible pour de nouvelles opportunités",
     heroTyped: "Data Analyst & Développeur Web | QA Testeur Junior",
     heroButtons: [["📂 Projets","#projects"],["✉️ Contact","#contact"],["💼 LinkedIn","https://linkedin.com/in/jawher-sbabti"],["🐙 GitHub","https://github.com/jawher71998"],["📄 CV (FR)",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`],["📄 CV (EN)",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti_EN.pdf`]],
@@ -165,6 +184,8 @@ const TXT = {
     aboutGreeting: "Bonjour, je suis Jawher 👋", aboutBadge: "✅ Open to Work",
     aboutTags: ["📊 Data Analyst","💻 Dev Web","🧪 QA Testeur","🤖 ML","📈 Power BI"],
     aboutCvFr: "📄 CV (Français)", aboutCvEn: "📄 CV (English)",
+    formationTitle: "Mes Études", formationSub: "Mon parcours académique — cliquez pour voir le diplôme",
+    formationCta: "👁️ Cliquer pour voir le diplôme",
     stagesTitle: "Mes Stages", stagesSub: "Expériences en entreprise — cliquez pour voir l'attestation",
     stagesCta: "👁️ Cliquer pour voir l'attestation",
     certifTitle: "Certifications", certifSub: "Mes certifications qui prouvent mes compétences",
@@ -186,7 +207,7 @@ const TXT = {
     scrollTop: "Retour en haut",
   },
   en: {
-    navLinks: ["Home","About","Internships","Certifications","Skills","Projects","Contact"],
+    navLinks: ["Home","About","Education","Internships","Certifications","Skills","Projects","Contact"],
     heroBadge: "🚀 Available for new opportunities",
     heroTyped: "Data Analyst & Web Developer | Junior QA Tester",
     heroButtons: [["📂 Projects","#projects"],["✉️ Contact","#contact"],["💼 LinkedIn","https://linkedin.com/in/jawher-sbabti"],["🐙 GitHub","https://github.com/jawher71998"],["📄 CV (FR)",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti.pdf`],["📄 CV (EN)",`${process.env.PUBLIC_URL}/CV_Jawher_Sbabti_EN.pdf`]],
@@ -195,6 +216,8 @@ const TXT = {
     aboutGreeting: "Hi, I'm Jawher 👋", aboutBadge: "✅ Open to Work",
     aboutTags: ["📊 Data Analyst","💻 Web Dev","🧪 QA Tester","🤖 ML","📈 Power BI"],
     aboutCvFr: "📄 CV (Français)", aboutCvEn: "📄 CV (English)",
+    formationTitle: "My Education", formationSub: "My academic path — click to view the diploma",
+    formationCta: "👁️ Click to view the diploma",
     stagesTitle: "My Internships", stagesSub: "Work experience — click to view the certificate",
     stagesCta: "👁️ Click to view the certificate",
     certifTitle: "Certifications", certifSub: "My certifications, proof of my skills",
@@ -290,7 +313,7 @@ function Nav({ active, lang, setLang, tt }) {
     onScroll();
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const ids = ["accueil","about","stages","certif","skills","projects","contact"];
+  const ids = ["accueil","about","formation","stages","certif","skills","projects","contact"];
   const links = tt.navLinks.map((l,i)=>[l, ids[i]]);
   const go = id => { document.getElementById(id)?.scrollIntoView({ behavior:"smooth" }); setMenuOpen(false); };
 
@@ -519,6 +542,35 @@ function Internships({ tt, lang }) {
   );
 }
 
+function Formation({ tt, lang }) {
+  const [modal, setModal] = useState(null);
+  const [ref, vis] = useVisible();
+  const diplomas = diplomasByLang[lang];
+  return (
+    <Wrap id="formation">
+      <Header title={tt.formationTitle} sub={tt.formationSub} />
+      <div ref={ref} style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(280px,1fr))", gap:"1.4rem", opacity:vis?1:0, transform:vis?"none":"translateY(30px)", transition:"all .7s" }}>
+        {diplomas.map((d,i)=>(
+          <div key={i} onClick={()=>setModal(d)}
+            style={{ background:"#fff", padding:"1.6rem", borderRadius:16, boxShadow:"0 5px 20px rgba(0,0,0,0.06)", borderLeft:`5px solid ${C.primary}`, cursor:"pointer", transition:"all .3s", display:"flex", gap:14, alignItems:"flex-start" }}
+            onMouseEnter={e=>{e.currentTarget.style.transform="translateY(-5px)"; e.currentTarget.style.boxShadow="0 15px 40px rgba(0,0,0,0.12)";}}
+            onMouseLeave={e=>{e.currentTarget.style.transform="none"; e.currentTarget.style.boxShadow="0 5px 20px rgba(0,0,0,0.06)";}}>
+            <span style={{ fontSize:"1.8rem", flexShrink:0 }}>🎓</span>
+            <div>
+              <h3 style={{ color:C.secondary, marginBottom:2, fontSize:"1.02rem" }}>{d.title}</h3>
+              <p style={{ color:C.primary, fontWeight:700, fontSize:13, marginBottom:2 }}>{d.org}</p>
+              <p style={{ color:"#aaa", fontSize:11, marginBottom:8 }}>{d.date}</p>
+              <p style={{ color:"#666", fontSize:13, lineHeight:1.7 }}>{d.desc}</p>
+              <p style={{ color:C.primary, fontSize:11, fontWeight:700, marginTop:10 }}>{tt.formationCta}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      {modal && <CertifModal c={modal} onClose={()=>setModal(null)} tt={tt} />}
+    </Wrap>
+  );
+}
+
 function Certifications({ tt, lang }) {
   const [modal, setModal] = useState(null);
   const [ref, vis] = useVisible();
@@ -728,10 +780,12 @@ export default function App() {
   const [lang, setLang] = useState("fr");
   const tt = TXT[lang];
   useEffect(() => {
-    const ids = ["accueil","about","stages","certif","skills","projects","contact"];
+    const ids = ["accueil","about","formation","stages","certif","skills","projects","contact"];
+    // Bande fine au centre-haut de l'écran : la section dont le haut traverse cette bande
+    // devient active, peu importe sa hauteur (fiable même pour les sections courtes).
     const o = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-    }, { threshold:0.25 });
+    }, { threshold:0, rootMargin:"-45% 0px -50% 0px" });
     ids.forEach(id => { const el = document.getElementById(id); if (el) o.observe(el); });
     return () => o.disconnect();
   }, []);
@@ -741,6 +795,7 @@ export default function App() {
       <div style={{ paddingTop:0 }}>
         <Hero tt={tt} />
         <About tt={tt} lang={lang} />
+        <Formation tt={tt} lang={lang} />
         <Internships tt={tt} lang={lang} />
         <Certifications tt={tt} lang={lang} />
         <Skills tt={tt} lang={lang} />
